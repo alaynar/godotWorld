@@ -1,7 +1,7 @@
 # godotWorld
-Godot World assignment for CS517
-Please play game on the web at [Godot World](https://alaynar.github.io/godotWorld/Godot%20World.html)
-There is music so I recommend headphones...
+- Godot World assignment for CS517
+- Please play game on the web at [Godot World](https://alaynar.github.io/godotWorld/Godot%20World.html)
+- There is music so I recommend headphones...
 
 ## Purpose
 This game was the version of 'Hello World' for game engine Godot and it's language.
