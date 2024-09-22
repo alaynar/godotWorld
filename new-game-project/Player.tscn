@@ -17,22 +17,34 @@ animations = [{
 "texture": ExtResource("2_xiw7a")
 }, {
 "duration": 1.0,
+"texture": ExtResource("1_a2par")
+}, {
+"duration": 1.0,
 "texture": ExtResource("3_02mtb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_k3d0c")
 }],
 "loop": true,
 "name": &"hit_up",
-"speed": 3.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("4_ygkku")
 }, {
 "duration": 1.0,
+"texture": ExtResource("3_8sol7")
+}, {
+"duration": 1.0,
 "texture": ExtResource("5_76q5y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_sxkrw")
 }],
 "loop": true,
 "name": &"hit_walk",
-"speed": 3.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -68,7 +80,7 @@ metadata/_edit_group_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_in2j6")
-animation = &"hit_walk"
+animation = &"hit_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_8imfw")

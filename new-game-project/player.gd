@@ -3,7 +3,7 @@ signal hit #For collissions
 signal end_game #For end game
 @export var speed = 400 #how fast the player will move (pixelss/sec).
 var screen_size #size of game window
-@export var lives = 3 #number of lives
+var lives #number of lives
 var inv = false #invincible for a certain amount of time
 
 # Called when the node enters the scene tree for the first time.
@@ -68,8 +68,9 @@ func _on_body_entered(body: Node2D) -> void:
 			$CollisionShape2D.set_deferred("disabled", true)
 	pass # Replace with function body.
 
-func start(pos):
+func start(pos,mainLive):
 	position = pos
+	lives = mainLive
 	show()
 	$AnimatedSprite2D.animation = "walk"
 	$CollisionShape2D.disabled = false
