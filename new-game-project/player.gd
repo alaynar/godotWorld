@@ -1,7 +1,10 @@
 extends Area2D
 signal hit #For collissions
+signal end_game #For end game
 @export var speed = 400 #how fast the player will move (pixelss/sec).
 var screen_size #size of game window
+@export var lives = 3 #number of lives
+var inv = false #invincible for a certain amount of time
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,26 +35,46 @@ func _process(delta: float) -> void:
 	position = position.clamp(Vector2.ZERO, screen_size)
 	
 	if velocity.x != 0:
-		$AnimatedSprite2D.animation = "walk"
+		if inv == false:
+			$AnimatedSprite2D.animation = "walk"
+		else:
+			$AnimatedSprite2D.animation = "hit_walk"
 		$AnimatedSprite2D.flip_v = false
 		$AnimatedSprite2D.flip_h = velocity.x < 0
 	elif velocity.y != 0:
-		$AnimatedSprite2D.animation = "up"
+		if inv == false:
+			$AnimatedSprite2D.animation = "up"
+		else:
+			$AnimatedSprite2D.animation = "hit_up"
 		$AnimatedSprite2D.flip_v = velocity.y > 0
 		
 	pass
 
 
 func _on_body_entered(body: Node2D) -> void:
-	hide() #Player disappears after being hit
-	hit.emit()
-	#Must be deferred as we can't change phusics properties on a phsysics callback
-	$CollisionShape2D.set_deferred("disabled", true)
-	
+	#hide() #Player disappears after being hit
+	if inv == false:
+		
+		lives -= 1
+		if lives <= 0:
+			lives = 0
+		hit.emit(lives)
+		$InvincibleTimer.start()
+		inv = true
+		if lives <= 0:
+			hide() #player disappears after end of health
+			end_game.emit()
+			#Must be deferred as we can't change physics properties on a phsysics callback
+			$CollisionShape2D.set_deferred("disabled", true)
 	pass # Replace with function body.
 
 func start(pos):
 	position = pos
 	show()
+	$AnimatedSprite2D.animation = "walk"
 	$CollisionShape2D.disabled = false
-	
+
+func _on_invincible_timer_timeout() -> void:
+	inv = false
+	$InvincibleTimer.stop()
+	pass # Replace with function body.

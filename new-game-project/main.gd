@@ -2,6 +2,7 @@ extends Node
 
 @export var mob_scene: PackedScene
 var score
+#var lives
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,13 +21,14 @@ func game_over() -> void:
 	$Music.stop()
 	$DeathSound.play()
 	pass # Replace with function body.
-
+	
 func new_game():
 	score = 0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	get_tree().call_group("mobs", "queue_free")
 	$HUD.update_score(score)
+	$HUD.update_lives(3)
 	$HUD.show_message("Get Ready")
 	$Music.play()
 	
@@ -65,3 +67,6 @@ func _on_mob_timer_timeout():
 	add_child(mob)
 	
 	
+func _on_player_hit(lives) -> void:
+	$HUD.update_lives(lives)
+	pass # Replace with function body.

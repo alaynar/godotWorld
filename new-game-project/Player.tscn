@@ -1,13 +1,39 @@
-[gd_scene load_steps=8 format=3 uid="uid://dss2sk4fcieid"]
+[gd_scene load_steps=12 format=3 uid="uid://dss2sk4fcieid"]
 
 [ext_resource type="Texture2D" uid="uid://cw4621ab5nrfd" path="res://art/playerGrey_up1.png" id="1_a2par"]
 [ext_resource type="Script" path="res://player.gd" id="1_xvicl"]
 [ext_resource type="Texture2D" uid="uid://b1raoyl6nf5pf" path="res://art/playerGrey_up2.png" id="2_k3d0c"]
+[ext_resource type="Texture2D" uid="uid://qula6lnjmueu" path="res://art/playerHit_up1.png" id="2_xiw7a"]
+[ext_resource type="Texture2D" uid="uid://cjnjt36aj6no" path="res://art/playerHit_up2.png" id="3_02mtb"]
 [ext_resource type="Texture2D" uid="uid://c3jo2ajwdu6c6" path="res://art/playerGrey_walk1.png" id="3_8sol7"]
 [ext_resource type="Texture2D" uid="uid://bdx2v87cxa0u1" path="res://art/playerGrey_walk2.png" id="4_sxkrw"]
+[ext_resource type="Texture2D" uid="uid://tl7jx7mgd3o6" path="res://art/playerHit_walk1.png" id="4_ygkku"]
+[ext_resource type="Texture2D" uid="uid://8m2ayv3d3b7k" path="res://art/playerHit_walk2.png" id="5_76q5y"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_in2j6"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xiw7a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_02mtb")
+}],
+"loop": true,
+"name": &"hit_up",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ygkku")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_76q5y")
+}],
+"loop": true,
+"name": &"hit_walk",
+"speed": 3.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_a2par")
@@ -42,9 +68,12 @@ metadata/_edit_group_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_in2j6")
-animation = &"up"
+animation = &"hit_walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_8imfw")
 
+[node name="InvincibleTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="InvincibleTimer" to="." method="_on_invincible_timer_timeout"]
