@@ -1,6 +1,6 @@
 # godotWorld
 - Godot World assignment for CS517
-- Please play game on the web at [Godot World](https://alaynar.github.io/godotWorld/Godot%20World.html)
+- Please play game on the web at [Godot World](https://alaynar.github.io/godotWorld/webFiles/Godot%20World.html)
 - There is music so I recommend headphones...
 
 ## Purpose
